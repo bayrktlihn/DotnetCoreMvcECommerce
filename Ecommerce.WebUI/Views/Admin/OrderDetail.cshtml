@@ -1,0 +1,84 @@
+@section menu{
+    @await Html.PartialAsync("_admin_menu")
+}
+
+@section user_information{
+    @await Component.InvokeAsync("AdminDetail")
+}
+
+@model Order
+
+
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                            <li class="breadcrumb-item active">Order Detail</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Order Detail</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-3">Items from Order @Model.OrderId</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-centered mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Product name</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (CartItem cartItem in Model.Cart.CartItems)
+                                    {
+                                        <tr>
+                                            <th scope="row">@cartItem.Product.Name</th>
+                                            <td><img src="/img/product/@cartItem.Product.ImageUrl" alt="product-img"
+                                                    height="32"></td>
+                                            <td>@cartItem.Quantity</td>
+                                            <td>@cartItem.Product.UnitPrice</td>
+                                            <td>@(cartItem.Product.UnitPrice * cartItem.Quantity)</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                                        <th scope="row" colspan="4" class="text-right">Total :</th>
+                                                        <td><div class="font-weight-bold">@Model.Cart.CalculateTotalPrice()</div></td>
+                                                    </tr>
+
+                                   
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+
+    </div> <!-- container -->
+
+</div> <!-- content -->

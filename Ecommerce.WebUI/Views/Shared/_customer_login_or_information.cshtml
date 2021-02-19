@@ -1,0 +1,58 @@
+@model User
+
+
+@if(Model == null){
+
+       
+    <li class="dropdown d-none d-lg-inline-block">
+        <a asp-controller="Customer" asp-action="Login"  class="nav-link btn btn-success">
+            Login
+        </a>
+    </li>
+        
+        
+    }else{
+        <li class="dropdown notification-list topbar-dropdown">
+                            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                @if (Model.Role.Name == "Admin")
+                                {
+                                    <img src="/img/admin/@Model.ImageUrl" alt="user-image" class="rounded-circle">
+                                }
+                                else{   
+                                    <img src="/img/customer/@Model.ImageUrl" alt="user-image" class="rounded-circle">
+                                }
+                                <span class="pro-user-name ml-1">
+                                    @Model.Name <i class="mdi mdi-chevron-down"></i> 
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown" style="">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+    
+                               
+    
+    
+                                <div class="dropdown-divider"></div>
+
+                                @if (Model.Role.Name == "Admin")
+                                {
+                                    <a asp-controller="Admin" asp-action="Logout" class="dropdown-item notify-item">
+                                        <i class="fe-log-out"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                }
+                                else{   
+                                    <a asp-controller="Customer" asp-action="Logout" class="dropdown-item notify-item">
+                                        <i class="fe-log-out"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                }
+
+                                <!-- item-->
+                                
+    
+                            </div>
+                        </li>
+    }

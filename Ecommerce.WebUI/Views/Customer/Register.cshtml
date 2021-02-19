@@ -1,0 +1,106 @@
+@{
+    Layout = "_Login_Layout";
+}
+
+@model PersonUserViewModel
+
+<div class="col-md-8 col-lg-6 col-xl-5">
+    <div class="card bg-pattern">
+
+        <div class="card-body p-4">
+
+            <div class="text-center w-75 m-auto">
+                <div class="auth-logo">
+                    <a href="index.html" class="logo logo-dark text-center">
+                        <span class="logo-lg">
+                            <img src="../assets/images/logo-dark.png" alt="" height="22">
+                        </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light text-center">
+                        <span class="logo-lg">
+                            <img src="../assets/images/logo-light.png" alt="" height="22">
+                        </span>
+                    </a>
+                </div>
+                <p class="text-muted mb-4 mt-3">Don't have an account? Create your account, it takes less than a minute
+                </p>
+            </div>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="text-center w-75 m-auto">
+                    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+                </div>
+            }
+
+            <form asp-controller="Customer" asp-action="Register" method="POST">
+
+                <input type="hidden" asp-for="Person.PersonId">
+                <input type="hidden" asp-for="User.UserId">
+
+                <div class="form-group">
+                    <label asp-for="Person.FirstName" ></label>
+                    <input asp-for="Person.FirstName" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Person.LastName" ></label>
+                    <input asp-for="Person.LastName" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Person.BirthDate" ></label>
+                    <input asp-for="Person.BirthDate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Person.Gender"></label>
+                    <select asp-for="Person.Gender" class="form-control">
+                        @foreach (Gender gender in ViewBag.GenderOptions)
+                        {
+                            <option value="@gender">@gender</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.Name" ></label>
+                    <input asp-for="User.Name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.Password" ></label>
+                    <input type="password" asp-for="User.Password" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="Password" ></label>
+                    <input name = "password" id="Password" type="password" class="form-control">
+                </div>
+
+                <div class="form-group mb-0 text-center">
+                                        <button class="btn btn-success btn-block" type="submit"> Sign Up </button>
+                                    </div>
+
+                 
+
+            
+
+                
+               
+                
+                
+
+            </form>
+
+         
+
+        </div> <!-- end card-body -->
+    </div>
+    <!-- end card -->
+
+   
+    <!-- end row -->
+
+</div>

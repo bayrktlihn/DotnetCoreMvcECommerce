@@ -1,0 +1,49 @@
+@section menu{
+    @await Html.PartialAsync("_customer_menu")
+}
+
+@section user_information{
+    @await Component.InvokeAsync("UserDetail")
+}
+
+@model List<Product>
+
+<div class="content">
+    <div class="container-fluid">
+<div class="row">
+
+
+    @foreach (Product product in Model)
+    {
+        <div class="col-md-6 col-xl-3">
+            <div class="card-box product-box">
+
+                <div class="bg-light">
+                    <img src="/img/product/@product.ImageUrl" alt="product-pic" class="img-fluid">
+                </div>
+
+                <div class="product-info">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h5 class="font-16 mt-0 sp-line-1">
+                                <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.ProductId" class="text-dark">@product.Name</a> 
+                            </h5>
+                            
+                            <h5 class="m-0"> <span class="text-muted"> Stocks : @product.StockAmount pcs</span></h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="product-price-tag">
+                                $@product.UnitPrice
+                            </div>
+                        </div>
+                    </div> <!-- end row -->
+                </div> <!-- end product info-->
+            </div> <!-- end card-box-->
+        </div> <!-- end col-->
+    }
+
+
+</div>
+    </div>
+</div>
+

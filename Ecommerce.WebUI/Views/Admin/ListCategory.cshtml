@@ -1,0 +1,66 @@
+@section menu{
+    @await Html.PartialAsync("_admin_menu")
+}
+
+@section user_information{
+    @await Component.InvokeAsync("AdminDetail")
+}
+
+@section Styles{
+<!-- third party css -->
+<link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+    type="text/css" />
+<!-- third party css end -->
+}
+
+@section Scripts{
+<!-- third party js -->
+<script src="/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script src="/assets/libs/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
+}
+
+@model List<Category>
+
+
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 my-2">
+                <a class="btn btn-success" asp-controller="Admin" asp-action="AddCategory">Add Category</a>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach(Category category in Model){
+                            <tr>
+                                <th scope="row">@category.CategoryId</th>
+                                <td>@category.Name</td>
+                                <td>
+                                    <a asp-controller="Admin" asp-action="DeleteCategory" asp-route-id="@category.CategoryId" class="btn btn-danger">Delete</a>
+                                    <a asp-controller="Admin" asp-action="EditCategory" asp-route-id="@category.CategoryId" class="btn btn-warning">Update</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        
+    </div> <!-- container -->
+
+</div>

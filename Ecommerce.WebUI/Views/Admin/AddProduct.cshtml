@@ -1,0 +1,160 @@
+@section menu{
+    @await Html.PartialAsync("_admin_menu")
+}
+
+@section user_information{
+    @await Component.InvokeAsync("AdminDetail")
+}
+
+@model Product
+
+<div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
+                                            <li class="breadcrumb-item active">Product Edit</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Add / Edit Product</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <form asp-controller="Admin" asp-action="SaveProduct" enctype="multipart/form-data" method="POST">
+                        <input type="hidden" value="@Model.ProductId" name="ProductId">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card-box">
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Name"></label> <span class="text-danger">*</span>
+                                        <input asp-for="Name" class="form-control" placeholder="Product Name">
+                                    </div>                                    
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="UnitPrice">Price </label> <span class="text-danger">*</span>
+                                        <input asp-for="UnitPrice" class="form-control" placeholder="Product Unit Price">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="StockAmount">Stock Amount </label> <span class="text-danger">*</span>
+                                        <input asp-for="StockAmount" class="form-control" placeholder="Product Stock Amount">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="CategoryId">Category </label> <span class="text-danger">*</span>
+                                        <select class="form-control" name="CategoryId" id="CategoryId">
+                                            @foreach (Category category in ViewBag.Categories)
+                                            {
+                                                @if(Model.Category == category){
+                                                    <option value="@category.CategoryId" selected>@category.Name</option>
+                                                }
+                                                else{
+                                                    
+                                                    <option value="@category.CategoryId">@category.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @if(Model.ImageUrl != null){  
+                                                <img src="/img/product/@Model.ImageUrl" class="img-fluid" alt="Responsive image">
+                                            }
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="ImageUrl">Image</label>
+                                                <input type="hidden" name="ImageUrl" id="ImageUrl" value="@Model.ImageUrl">
+                                                <input type="file" name="imageFile" class="form-control-file" id="ImageUrl">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    
+
+                                    
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+
+
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center mb-3">
+                                    <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Save</button>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+
+                        </form>
+                        <!-- end row -->
+
+
+                        <!-- file preview template -->
+                        <div class="d-none" id="uploadPreviewTemplate">
+                            <div class="card mt-1 mb-0 shadow-none border">
+                                <div class="p-2">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <img data-dz-thumbnail="" src="#" class="avatar-sm rounded bg-light" alt="">
+                                        </div>
+                                        <div class="col pl-0">
+                                            <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name=""></a>
+                                            <p class="mb-0" data-dz-size=""></p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <!-- Button -->
+                                            <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove="">
+                                                <i class="dripicons-cross"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div> <!-- container -->
+
+                </div>
+
+
+@section Scripts{
+
+        <!-- Summernote js -->
+        <script src="/assets/libs/summernote/summernote-bs4.min.js"></script>
+        <!-- Select2 js-->
+        <script src="/assets/libs/select2/js/select2.min.js"></script>
+        <!-- Dropzone file uploads-->
+        <script src="/assets/libs/dropzone/min/dropzone.min.js"></script>
+
+        <!-- Init js-->
+        <script src="/assets/js/pages/form-fileuploads.init.js"></script>
+
+        <!-- Init js -->
+        <script src="/assets/js/pages/add-product.init.js"></script>
+
+}
+
+@section Styles{
+        <link href="/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+}

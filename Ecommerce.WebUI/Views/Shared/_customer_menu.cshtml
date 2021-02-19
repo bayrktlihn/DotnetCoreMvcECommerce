@@ -1,0 +1,21 @@
+<ul id="side-menu">
+
+    <li>
+        <a href="#sidebarEcommerce" data-toggle="collapse">
+            <i class="mdi mdi-cart-outline"></i>
+            <span> Ecommerce </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarEcommerce">
+            <ul class="nav-second-level">
+                <li>
+                    <a asp-controller="Product" asp-action="List">Products</a>
+                </li>
+                <li>
+                    <a asp-controller="Cart" asp-action="" asp-route-id="">Shopping Cart</a>
+                </li>
+               
+            </ul>
+        </div>
+    </li>
+</ul>

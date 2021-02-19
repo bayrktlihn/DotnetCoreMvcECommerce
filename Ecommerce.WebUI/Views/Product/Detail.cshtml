@@ -1,0 +1,89 @@
+@model Product
+
+@section menu{
+    @await Html.PartialAsync("_customer_menu")
+}
+
+@section user_information{
+    @await Component.InvokeAsync("UserDetail")
+}
+
+<div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
+                                            <li class="breadcrumb-item active">Product Detail</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Product Detail</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+
+                                            <div class="tab-content pt-0">
+                                                <div class="tab-pane active show">
+                                                    <img src="/img/product/@Model.ImageUrl" alt="" class="img-fluid mx-auto d-block rounded">
+                                                </div>
+                                                
+                                            </div>
+
+                                        
+                                        </div> <!-- end col -->
+                                        <form method="POST" asp-controller="Cart" asp-action="AddProduct">
+                                        <input type="hidden" name="productId" value="@Model.ProductId">
+                                        <div class="col-lg-7">
+                                            <div class="pl-xl-3 mt-3 mt-xl-0">
+                                                <h4 class="mb-3">@Model.Name</h4>
+                                                
+                                                <h4 class="mb-4">Price :  <b>$@Model.UnitPrice USD</b></h4>
+                                                <h4><span class="badge bg-soft-success text-success mb-4">Instock</span></h4>
+                                                
+                                                <form class="form-inline mb-4">
+                                                    <label class="my-1 mr-2" for="quantityinput">Quantity</label>
+                                                    <select name="quantity" class="custom-select my-1 mr-sm-3" id="quantityinput">
+                                                        @for(int i = 0; i<Model.StockAmount; i++){
+                                                            <option value="@(i+1)">@(i+1)</option>
+                                                        }
+                                                    </select>
+
+                                                    
+                                                </form>
+
+                                                <div>
+                                                     <button type="submit" class="btn btn-success waves-effect waves-light">
+                                                        <span class="btn-label"><i class="mdi mdi-cart"></i></span>Add to cart
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                        </form>
+                                    </div>
+                                    <!-- end row -->
+
+
+                                  
+
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row-->
+                        
+                    </div> <!-- container -->
+
+                </div>

@@ -1,0 +1,7 @@
+@section menu{
+    @await Html.PartialAsync("_admin_menu")
+}
+
+@section user_information{
+    @await Component.InvokeAsync("AdminDetail")
+}
